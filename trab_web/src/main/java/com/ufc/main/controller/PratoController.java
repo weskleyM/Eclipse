@@ -22,7 +22,7 @@ import com.ufc.main.service.PratoService;
 public class PratoController {
 
 	@Autowired
-	PratoService pratoService;
+	private PratoService pratoService;
 
 	@RequestMapping(value = { "/lista" }, method = { RequestMethod.GET })
 	public ModelAndView listarPrato() {

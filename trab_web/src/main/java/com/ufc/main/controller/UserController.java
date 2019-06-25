@@ -1,5 +1,7 @@
 package com.ufc.main.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ufc.main.model.Prato;
 import com.ufc.main.model.User;
+import com.ufc.main.service.PratoService;
 import com.ufc.main.service.UserService;
 
 @Controller
 public class UserController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
+
+	@Autowired
+	private PratoService pratoService;
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
@@ -36,6 +43,8 @@ public class UserController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("home");
+		List<Prato> pratos = pratoService.listarPratos();
+		mv.addObject("pratos", pratos);
 		return mv;
 	}
 
